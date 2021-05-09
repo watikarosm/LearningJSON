@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.3.3/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.3.3/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.3.3/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.3.3/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.3.3/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.3.3/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.3.3/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.3.3/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.3.3/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.3.3/firebase-performance.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+
+    <!-- 
+        initialize the SDK after all desired features are loaded, set useEmulator to false
+        to avoid connecting the SDK to running emulators.
+            -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style media="screen">
+        body {
+            background: #ECEFF1;
+            color: rgba(0, 0, 0, 0.87);
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #message {
+            background: white;
+            max-width: 800px;
+            max-height: auto;
+            margin: auto auto 16px;
+            padding: 32px 24px;
+            border-radius: 3px;
+        }
+        
+        #message h2 {
+            color: #ffa100;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 0 0 8px;
+        }
+        
+        #message h1 {
+            font-size: 22px;
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.6);
+            margin: 0 0 16px;
+        }
+        
+        #message p {
+            line-height: 140%;
+            margin: 16px 0 24px;
+            font-size: 14px;
+        }
+        
+        #message a {
+            display: block;
+            text-align: center;
+            background: #039be5;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: white;
+            padding: 16px;
+            border-radius: 4px;
+        }
+        
+        #message,
+        #message a {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+        
+        #load {
+            color: rgba(0, 0, 0, 0.4);
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 600px) {
+            body,
+            #message {
+                margin-top: 0;
+                background: white;
+                box-shadow: none;
+            }
+            body {
+                border-top: 16px solid #ffa100;
+            }
+        }
+    </style>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        /* Create two equal columns that floats next to each other */
+        
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: auto;
+            /* Should be removed. Only for demonstration */
+        }
+        /* Clear floats after the columns */
+        
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <style>
+        /* Button used to open the chat form - fixed at the bottom of the page */
+        /* From w3schools.com */
+        
+        .open-button {
+            background-color: #555;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+        }
+        /* The popup chat - hidden by default */
+        
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+        /* Add styles to the form container */
+        
+        .form-container {
+            max-width: auto;
+            padding: 10px;
+            background-color: white;
+        }
+        /* Full-width textarea */
+        
+        .form-container textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+            resize: none;
+            min-height: 200px;
+        }
+        /* END from w3schools.com */
+    </style>
+    <script>
+        var myDate = new Date();
+        var hrs = myDate.getHours();
+
+        var greet;
+
+        if (hrs < 12)
+            greet = 'Good Morning';
+        else if (hrs >= 12 && hrs <= 17)
+            greet = 'Good Afternoon';
+        else if (hrs >= 17 && hrs <= 24)
+            greet = 'Good Evening';
+    </script>
+    <script>
+        var window = new Window();
+        window.on('load', function() {
+
+            function enableSSO() {
+                setTimeout(function() {
+                    window.addEventListener("message", receiveMessage, false);
+                    variframe = document.createElement('iframe');
+                    iframe.src = '';
+                    iframe.setAttribute('id', 'sso-frame');
+                    iframe.setAttribute('style', 'width: 0; height: 0; border:0; border: none; position absolute;');
+                    iframe.setAttribute('aria-hidden', true);
+                    $('body').prepend(iframe);
+                }, 500);
+            }
+
+            function receiveMessage(event) {
+                if (event.origin !== 'https://sp2021usfsncae.web.app/' || event.data !== 'sso-success') {
+                    return;
+                }
+                window.setTimeout(function() {
+                    document.getElementById('sso-frame').contenWindow.location.replace('output:enabled[type="message"]'); // modified here
+                }, 30 * 60 * 1000);
+                var enabledStubmitInputs = $('input:enabled[type="submit"],button:enabled[type="submit"]');
+                enabledSubmitInputs.attr('disabled', true);
+                window.dispatchEvent(createNewEvent('sso.success'));
+                // mssing ajax
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <div>
+        <p id="lblGreetings"></p>
+        <label id="lblGreetings" style="font-size: 18px; font-style: italic;">Greeting Box</label></div>
+    <div id="message">
+        <h1>History</h1>
+        <button onclick="myFunction()">Go Back</button>
+        <button onclick="forwardFunction()">Go forward</button>
+
+        <script>
+            function myFunction() {
+                window.history.back();
+            }
+
+            function forwardFunction() {
+                window.history.forward();
+            }
+        </script>
+    </div>
+    <div id="message">
+        <h2>Welcome</h2>
+        <h1>Web Application for Chatbots Services</h1>
+        <p>These bot can answer for you many questions.</p>
+        <div class="row">
+            <p>Click the button to get your coordinates.</p>
+            <button onclick="getLocation()">Try It</button>
+            <p><strong>Note:</strong> The geolocation property is not supported in IE8 and earlier versions.</p>
+            <p id="demo"></p>
+        </div>
+        <a target="_blank">Bot Services Agents</a>
+        <div class="row ">
+            <div class="column " name="a ">
+                <a target="_blank ">
+                    <h3>Legal Q & A</h3>
+                    <p style="font-size: 12px; left: 3px;">The legal bot can answer many questions about the law.</br>Just say hi in the message box.
+                    </p> <iframe title="Legal questions" src='https://webchat.botframework.com/embed/SaraMint?s=aLGc89pOiok.FwVqjqAfh5tfJpnTU04v9RlaqIAZQamOhgHlTK--OMg' style='min-width: 100px; width: 100%; min-height: 325px;'>
+                        </iframe>
+                </a>
+            </div>
+            <div class=" column " name="b ">
+                <a target="_blank ">
+                    <h3>CAE Q & A</h3>
+                    <p style="font-size: 12px; left: 3px">CAE engineers can ask many technical questions.</br>Just say hi in the message box.</p> <iframe title="CAE questions" src='https://webchat.botframework.com/embed/CAE-Chatbot?s=J3Oy_mhZxJ4.QeXglxgKjYDWDxpJMlDfMrgvJcJCFdx6TXXcjAG8tHw'
+                        style='min-width: 100px; width: 100%; min-height: 325px;'>
+                        </iframe>
+                </a>
+            </div>
+            <button class="open-button" onclick="openForm()">Chat with ME</button>
+        </div>
+    </div>
+    <div class="column" name="c" style="left: 100px;">
+        <p id=" load ">Using Firbase SDK</p>
+    </div>
+
+    <div class="chat-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+            <h1>Chat</h1>
+
+            <label for="msg"><b>Message</b></label>
+            <textarea placeholder="Type message.." name="msg" required></textarea>
+
+            <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+    <script>
+        /* From w3schools.com */
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+        /* END From w3schools.com*/
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadEl = document.querySelector('#load');
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+            // // The Firebase SDK is initialized and available here!
+            //
+            // firebase.auth().onAuthStateChanged(user => { });
+            // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+            // firebase.firestore().doc('/foo/bar').get().then(() => { });
+            // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+            // firebase.messaging().requestPermission().then(() => { });
+            // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+            // firebase.analytics(); // call to activate
+            // firebase.analytics().logEvent('tutorial_completed');
+            // firebase.performance(); // call to activate
+            //
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+            try {
+                let app = firebase.app();
+                let features = [
+                    'auth',
+                    'database',
+                    'firestore',
+                    'functions',
+                    'messaging',
+                    'storage',
+                    'analytics',
+                    'remoteConfig',
+                    'performance',
+                ].filter(feature => typeof app[feature] === 'function');
+                loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+            } catch (e) {
+                console.error(e);
+                loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+            }
+        });
+    </script>
+
+
+    <script>
+        var x = document.getElementById("demo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+        }
+    </script>
+</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/8.4.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/8.4.1/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+</html>
