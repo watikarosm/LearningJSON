@@ -1,0 +1,20 @@
+[{
+        "name": "Spot",
+        "species": "cat",
+        "favFood": "tuna"
+    },
+    {
+        "name": "Blacktail",
+        "species": "cat",
+        "favFood": "tuna"
+    },
+    {
+        "name": "Shorttail",
+        "species": "cat",
+        "favFood": "tuna"
+    }, {
+        "name": "Longtail",
+        "species": "cat",
+        "favFood": "tuna"
+    }
+];
