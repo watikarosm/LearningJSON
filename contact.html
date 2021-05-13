@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Sarabun:400,700" rel="stylesheet">
+    <title>Contact Us</title>
+    <link rel="stylesheet" type="text/css" href="contact.css">
+</head>
+
+<body>
+    <h1 class="title">Contact Us</h1>
+    <p>email</p>
+</body>
+
+</html>
+<h1 id="title">My Website</h1>
+
+<p class="para-text">Class will over right the id, and id will overwrite the h2</p>
+
+<h2 class="subtitle" id="about-me">About Me</h2>
+
+<img src="../imges/MountHoodFullMoonErupting.jpg" id="about-us-image">
+
+<p class="para-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+    <span class="italics">Lorem ipsum dolor sit amet</span>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Cillum dolore eu fugiat nulla , pariatur:
+
+    <ul>
+        <li>Sibling Selectors</li>
+        <li class="list-item">First-child is a pseudo selector that specifies the first subordinate item of the group such as lists within the list.</li>
+        <ol>
+            <li class="list-item">li:first-child</li>
+            <li class="list-item">li:nth-child(n)</li>
+            <li class="list-item">li:last-child</li>
+        </ol>
+        <li class="list-item">Attribute Selectors</li>
+        <ol>
+            <li class="list-item">h2[Attribute:selector], for example, h2[class : subtitle]{ color: blue; }</li>
+            <li class="list-item">img[src^="../imges/"]{ border: 10px solid rgb(233 11 11); } means all images within this folder will have a border of 10px and is red.</li>
+            <li class="list-item">last-childimg[src*="../imges/"]{ border: 10px solid rgb(233 11 11); } means any images within this folder will have a border of 10px and is red.</li>
+        </ol>
+        <li class="list-item">Third-child</li>
+        <ol>
+            <li class="list-item">first-child</li>
+            <li class="list-item">nth-child(n)</li>
+            <li class="list-item">last-child</li>
+        </ol>
+        <li class="list-item">Last-child</li>
+        <ol>
+            <li class="list-item">ol li { color: mediumorchid;} means list after ordered list text color is mediumorchid.</li>
+            <li class="list-item">ul > li { color: limegreen }; means list that is a child of unordered list text color is limegreen.</li>
+            <li class="list-item">last-child</li>
+        </ol>
+        <ol>
+            <li class="list-item">li:only-child</li>
+        </ol>
+    </ul>
+</p>
+
+<h2 class="subtitle article-subtitle">Services (This heading has burlywood color background.)</h2>
+<a href="./imges/MountHood.jpg" class="link">Mount Hood</a>
+<p>There can be multiple name for class which can select more specific attribute for instruction. For Example, h2[class~=article-subtitle] { background-color: burlywood; }</p>
+<p>h2[class|=article-subtitle] { background-color: burlywood; } "|" means that for any h2 that have "-subtitle" as the name of the class will have background color burlywood.</p>
+
+<h3 class="subtitle sub-subtitle">Pseudo Selector such as, "h3:hover" is an example of extension for selectors seen here.</h3>
+
+<a href="http://www.google.com" id="google-link" class="link">Click here to go to Google</a>
+<p>A hyperlink or an anchor text also has it's own pseudo selector, such as "visited" and "link". </p>
+<table border="1" class="site-table">
+    <thead>
+        <tr>
+            <td id="contact-us">id: #identification{}</td>
+            <td class="subtitle">id trumps class</td>
+            <td>Consectetur</td>
+            <td>Inline Style trumps all</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Id should be very specific and not as often.</td>
+            <td class="title">class: .some-class{color: maroon}</td>
+            <td class="about-me">Class trumps instruction</td>
+            <td class="subtitle">Inline Style trumps all</td>
+        </tr>
+        <tr>
+            <td>Class can be used multiple times.</td>
+            <td>Elit</td>
+            <td>html instruction: h2, h3, p, table, td, etc.</td>
+            <td id="contact-us" class="subtitle">Inline Style trumps all</td>
+        </tr>
+        <tr>
+            <td>Inline style is very specific, like only once.</td>
+            <td>Elit</td>
+            <td>html instruction: h2, h3, p, table, td, etc.</td>
+            <td style="color: brown" id="contact-us" class="subtitle">Inline Style trumps all</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div id="service-image"></div>
+
+
+<div class="container">
+    <div class="container-item" style="order: 4;
+	flex: 1 1 100px;
+	align-self: center;
+	">A</div>
+    <div class="container-item" style="order: 3;
+	flex: 1 3 100px;
+	align-self: flex-end;
+	">B</div>
+    <div class="container-item" style="order: 5;
+	flex: 5 1 100px;
+	align-self: flex-start;
+	">C</div>
+    <div class="container-item" style="order: 1;
+	flex: 1 0 100px;
+	align-self: flex-start;
+	">D</div>
+    <div class="container-item" style="order: 2;
+	flex: 1 1 100px;
+	align-self: center;
+	">E</div>
+</div>
+
+<div class="grid-container">
+    <div class="grid-item" style="
+	background: rgb(255, 150, 150);
+	grid-area: 2 / 1 / span 2 / span 3;
+	">1</div>
+    <div class="grid-item" style="
+	background: rgb(170, 255, 140);
+	">2</div>
+    <div class="grid-item" style="
+	background: rgb(222, 132, 255);
+	">3</div>
+    <div class="grid-item" style="
+	background: rgb(255, 207, 119);
+	">4</div>
+    <div class="grid-item" style="
+	background: rgb(140, 210, 255);
+	">5</div>
+    <div class="grid-item" style="
+	background: rgb(255, 203, 99);
+	">6</div>
+</div>
+
+<h2 class="subtitle">Contact Us</h2>
+
+<form>
+    <input type="text" placeholder="Full Name" class="form-input">
+    <input type="email" placeholder="Email" class="form-input">
+    <textarea></textarea>
+    <button class="submit-button">Submit</button>
+</form>
+
+</body>
+
+</html>
