@@ -1,0 +1,93 @@
+.title {
+    color: maroon;
+}
+
+.subtitle {
+    color: blue;
+}
+
+#contact-us {
+    color: green;
+}
+
+.about-me {
+    color: rgb(83, 83, 8);
+}
+
+td {
+    color: magenta;
+}
+
+h2:hover {
+    color: yellowgreen;
+}
+
+h3:hover {
+    color: red;
+}
+
+
+/*
+li:first-child {
+    color: steelblue;
+}
+
+li:last-child {
+    color: slateblue;
+}
+*/
+
+li:nth-child(2) {
+    color: teal;
+}
+
+li:only-child {
+    color: springgreen;
+}
+
+
+/*
+#google-link:link {
+    color: blue;
+}
+
+#google-link:visited {
+    color: crimson;
+}
+*/
+
+h2+a {
+    color: darkgreen;
+}
+
+h3+a {
+    color: darkorange;
+}
+
+textarea~button {
+    border-color: darkred;
+    color: lightgreen;
+}
+
+ul>li {
+    color: limegreen;
+}
+
+ol li {
+    color: mediumorchid;
+}
+
+
+/* attribute selector */
+
+img[src^="../imges/"] {
+    border: 10px solid rgb(233, 11, 11);
+}
+
+h2[class~=article-subtitle] {
+    background-color: burlywood;
+}
+
+h3[class|=sub-subtitle] {
+    background-color: chocolate;
+}
